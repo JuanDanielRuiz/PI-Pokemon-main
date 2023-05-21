@@ -1,0 +1,27 @@
+/// TOOD 
+... Favor de agregar a todas las funciones los nombres correctos de las peticiones ejemplo => {
+  📍 MODELO 1 | Pokemons
+
+ID. *
+Nombre. *
+Imagen. *
+Vida. *
+Ataque. *
+Defensa. *
+Velocidad.
+Altura.
+Peso.
+
+📍 MODELO 2 | Type
+
+ID. *
+Nombre. *
+  
+}
+
+
+/TODO two 
+
+Elaborar la Home page del Fron end ..
+Tenemos que elaborar una ruta para conectar meciante un boton a la Home Page 
+Puntos extras se peude usar algun login 

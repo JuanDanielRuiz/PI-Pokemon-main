@@ -1,0 +1,8 @@
+.Botons-Filtro select {
+  border-radius: 1rem;
+  margin-left: 1rem;
+  border: transparent;
+  background-color: azure;
+  padding: 1rem;
+  color: blueviolet;
+}

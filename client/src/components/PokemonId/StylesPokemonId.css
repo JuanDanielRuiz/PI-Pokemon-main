@@ -1,0 +1,24 @@
+
+
+.card-search {
+  border: 4px solid black;
+  margin: auto;
+  width: 18rem;
+  border-radius: 2rem;
+  background-color: #B9F3E4;
+}
+.imagen-pokemon-search img{
+  width: 15rem;
+  
+  
+}
+.info-pokemon-search {
+  padding: 2rem
+}
+
+.info-pokemon-search p {
+  font-size: 1rem;
+  text-align: center;
+  color: rgb(51, 31, 162);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

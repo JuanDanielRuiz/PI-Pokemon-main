@@ -1,0 +1,27 @@
+.containerDetail {
+  margin-top: 8rem;
+ 
+}
+
+.card-Detail {
+ border: 4px solid brown;
+ width: 20rem;
+ margin: auto;
+ border-top-left-radius: 3rem;
+ border-bottom-right-radius: 2rem;
+ background-color: #8294C4;
+ 
+}
+
+.imagen-pokemon-Detail img {
+  width: 10rem;
+  border: 2px solid black;
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+.Delete {
+  background-color: red;
+  border-radius: 3rem;
+  height: 100%;
+}

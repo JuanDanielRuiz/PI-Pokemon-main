@@ -1,0 +1,29 @@
+.container{
+  width: 15rem;
+  float: left;
+  margin-top: 3rem;
+  margin-left: 3rem;
+}
+.card {
+  border: 3px solid black;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 2rem;
+  background-color: #E8F3D6;
+}
+.info-pokemon p {
+  font-size: 15px;
+  color: rgb(20, 128, 128);
+
+  
+}
+
+.imagen-pokemon {
+  border: 1px solid black;
+  width: 10rem;
+  margin: auto;
+  margin-top: 1rem;
+}
+.imagen-pokemon img {
+  width: 5rem;
+}

@@ -1,0 +1,7 @@
+Trabajar en el componente de Search pro id de cada pokemon ,,, No eliminar la funcion que renderiza los pokemons al cargar la api 
+
+Recuerda Podemos tener una redirecion a una nueva pestana con el nuevo pokemon filtrado por id  algo parecido al detail y con un boton de regresar podemos volver a todos 
+los pokemons 
+
+
+//// TRABAJAR EN EL COMPONENTE FORM TENEMOS QUE RENDERIZAR LAS OPCIONES DE TYPES DE POPKEMONS PARA PODER ELEJIR UNO 

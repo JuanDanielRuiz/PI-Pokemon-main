@@ -6,11 +6,11 @@ const {Pokemon,Type} = require('../db')
 
   const getById = async (req, res) => {
     const id = req.params.id
-    // console.log('soy id',id)
+   
   
     try {
       if (typeof id === 'string' && id.length > 5) {
-        console.log('soy id')
+       
         const db = await Pokemon.findByPk(id)
         const pokemondb = {
           id: db.id,

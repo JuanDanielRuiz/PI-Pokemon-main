@@ -31,7 +31,7 @@ const DetailPokemon = () => {
  
  
   return (
-    <>
+    <div className="fondo-Detail">
     
      <div className="containerDetail">
       <Link to="/home">
@@ -76,7 +76,7 @@ const DetailPokemon = () => {
     {
       pokemon.id ? null : <Cargando/>
     }
-    </>
+    </div>
   )
 }
 

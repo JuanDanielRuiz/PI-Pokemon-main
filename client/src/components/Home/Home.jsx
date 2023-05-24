@@ -7,13 +7,10 @@ import Cargando from "../Cargando/Cargando";
 import Paginacion from "../Paginacion/Paginacion";
 import PokemonID from "../PokemonId/PokemonID";
 import CardSearch from "../PokemonId/CardSearch";
-import {
-  getPokemons,
-  getTypes,
-  getPokemonsBD,
-} from "../../Redux/actions";
+import { getPokemons, getTypes, getPokemonsBD } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import BarraBotons from "../BarraBotons/BarraBotons";
+import "./StylesHome.css"
 
 // Definimos nuestro componente
 const Home = () => {
@@ -23,13 +20,11 @@ const Home = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
 
- 
-
   // Hacemos uso de UseState Para nuestro estado local
   // const [pokemons, Setpokemons] = useState([]);
   const [currenPage, SetCurrenPage] = useState(0);
   const [pokemonSearch, SetPokemonSearch] = useState([]);
-  
+
   /// La importancioa del UseEfect al renderizar nuestro componente se realiza la llamada a la api
   // solo una vez para evitar un ciclo infinito
 
@@ -41,10 +36,12 @@ const Home = () => {
         const URL = `http://localhost:3001/pokemons/name/${id}`;
         const { data } = await axios(URL);
         SetPokemonSearch(data);
-       
+
         return;
       } catch (error) {
-        alert(`No tengo pokemons En mi Api o en Mi base de datos con este nombre ${id}`)
+        alert(
+          `No tengo pokemons En mi Api o en Mi base de datos con este nombre ${id}`
+        );
       }
     }
     try {
@@ -52,10 +49,12 @@ const Home = () => {
       const URL = `http://localhost:3001/pokemons/${id}`;
       const { data } = await axios(URL);
       SetPokemonSearch(data);
-     
+
       return;
     } catch (error) {
-      alert(`No tengo pokemons En mi Api o en Mi base de datos con este id ${id}`)
+      alert(
+        `No tengo pokemons En mi Api o en Mi base de datos con este id ${id}`
+      );
     }
   };
   //
@@ -63,7 +62,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getPokemons());
     dispatch(getTypes());
-    dispatch(getPokemonsBD())
+    dispatch(getPokemonsBD());
   }, [dispatch]);
 
   /// Paginacion
@@ -84,22 +83,17 @@ const Home = () => {
     }
   };
 
-  console.log(pokemonSearch);
 
-  
-  
-   
   return (
-    <>
-      <div>
-      <Paginacion NextPage={NextPage} AnteriorPage={AnteriorPage} />
-       
-        <PokemonID onSearch={onSearch} pokemonSearch={pokemonSearch} />
+    <div className="fondo-Home">
+       <div>
         
+        <Paginacion NextPage={NextPage} AnteriorPage={AnteriorPage} />
+        <PokemonID onSearch={onSearch} pokemonSearch={pokemonSearch} />
+        <h2>Pokemons Cards</h2>
+        <BarraBotons />
+
       </div>
-      <h2>Pokemons Cards</h2>
-      <BarraBotons/>
-      
 
       {pokemonSearch.id ? (
         <CardSearch
@@ -116,14 +110,13 @@ const Home = () => {
           type={pokemonSearch.type}
         />
       ) : (
-        
+      
         FilterPokemonsPaginacion().map(({ id, name, type, img }) => {
           return <Card key={id} id={id} name={name} type={type} img={img} />;
         })
       )}
       {pokemons.length ? null : <Cargando />}
-      
-    </>
+    </div>
   );
 };
 

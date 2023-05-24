@@ -6,7 +6,7 @@ const {Pokemon,Type } = require('../db')
 
   const getByName = async (req, res) => {
     const name = req.params.name
-    console.log('soy name',name)
+   
     
     try {
       

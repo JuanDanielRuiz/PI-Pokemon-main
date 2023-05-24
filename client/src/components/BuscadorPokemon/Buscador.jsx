@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "./StylesBuscador.css"
 
+
 const Buscador = ({onSearch}) => {
 
   const [BuscadorPokemon,SetBuscadorPokemon] = useState('')
@@ -15,10 +16,12 @@ const Buscador = ({onSearch}) => {
                 <input type="searchs"
                     placeholder=" Search Pokemon"
                     name="search" value={BuscadorPokemon} onChange={handleBuscador}/>
+                
                 <button onClick={() => onSearch(BuscadorPokemon)}>
                     Buscar
                 </button>
           
+            
         </div>
     
     </div>

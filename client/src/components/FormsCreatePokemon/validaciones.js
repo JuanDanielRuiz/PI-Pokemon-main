@@ -48,10 +48,10 @@ export const validate = (userData) => {
   if (userData.peso < 0 || userData.peso > 1000 || userData.peso === 0){
     errors.peso = 'Lo siento el peso no puede ser mayor a 1000 o menor a 0'
   }
-  if( userData.tipos === ''){
-    errors.tipos = 'Falta el tipo de tu pokemon '
+  if( userData.type === ""){
+    errors.type = 'Falta el tipo de tu pokemon '
   }
- 
+
   return errors
 }
 

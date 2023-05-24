@@ -1,3 +1,5 @@
+import {GET_POKEMONS,GET_POKEMONS_DB,SET_TYPES,GET_TYPES,BY_TYPE,FILTER_CREATED,ORDER_ATTACK,ORDER_BY_NAME,GET_POKEMON_BY_ID,GET_CLEAN,GET_POKEMONS_NAME,DELETE_POKEMON,POST_POKEMON} from "./actions-types";
+
 const initialState = {
   pokemons: [],
   allPokemons: [],
@@ -9,13 +11,13 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case 'GET_POKEMONS':
+    case GET_POKEMONS:
       return {
         ...state,
         pokemons: action.payload,
         allPokemons: action.payload,
       };
-      case 'GET_POKEMONS_DB':
+      case GET_POKEMONS_DB:
         return {
           ...state,
           pokemonBD: action.payload,
@@ -24,25 +26,25 @@ export default function rootReducer(state = initialState, action) {
         };
   
 
-    case 'SET_TYPES': {
+    case SET_TYPES: {
       return {
         ...state,
         types: action.payload,
         typesGet: action.payload,
       };
     }
-    case 'GET_TYPES':
+    case GET_TYPES:
       return {
         ...state,
         typesGet: action.payload,
       };
 
-    case 'POST_POKEMON':
+    case POST_POKEMON:
       return {
         ...state,
       };
 
-    case 'BY_TYPE':
+    case BY_TYPE:
       const allPokemon = state.allPokemons;
 
       const typeFiltered =
@@ -55,7 +57,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         pokemons: typeFiltered,
       };
-    case 'FILTER_CREATED':
+    case FILTER_CREATED:
       const allPokemons = state.allPokemons;
 
       const createdFilter =
@@ -67,7 +69,7 @@ export default function rootReducer(state = initialState, action) {
         pokemons: action.payload === 'todos' ? allPokemons : createdFilter,
       };
 
-    case 'ORDER_BY_NAME':
+    case ORDER_BY_NAME:
       const sortedPokemons =
         action.payload === 'asc'
           ? state.pokemons.sort((a, b) => {
@@ -93,7 +95,7 @@ export default function rootReducer(state = initialState, action) {
         pokemons: sortedPokemons,
       };
 
-    case 'ORDER_ATTACK':
+    case ORDER_ATTACK:
       const pokemonesAttack = state.allPokemons;
       const sortedByAttack =
         action.payload === 'fuer-asc'
@@ -118,25 +120,25 @@ export default function rootReducer(state = initialState, action) {
             
       return { ...state, pokemons: sortedByAttack };
 
-    case 'GET_POKEMONS_NAME':
+    case GET_POKEMONS_NAME:
       return {
         ...state,
         pokemons: [action.payload],
       };
 
-    case 'GET_POKEMON_BY_ID':
+    case GET_POKEMON_BY_ID:
       return {
         ...state,
         detail: action.payload,
       };
 
-    case 'GET_CLEAN':
+    case GET_CLEAN:
       return {
         ...state,
         detail: action.payload,
       };
 
-    case 'DELETE_POKEMON':
+    case DELETE_POKEMON:
       return {
         ...state,
       };

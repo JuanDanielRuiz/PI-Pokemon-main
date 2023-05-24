@@ -25,7 +25,7 @@ const BarraBotons = () => {
   const handleFilterCreated = (e) => {
     dispatch(filterCreated(e.target.value));
   };
-  const tipos = Object(allTypes.types)
+  
   return (
     <div className='Botons-Filtro'>
    
@@ -43,26 +43,13 @@ const BarraBotons = () => {
         <select  onChange={handleTypeFilter}>
                         <option value='' disabled selected >Filter by type</option>
                         <option value='todos'>All</option>
-                        <option value={tipos[0]}>{tipos[0]}</option>
-                        <option value={tipos[1]}>{tipos[1]}</option>
-                        <option value={tipos[2]}>{tipos[2]}</option>
-                        <option value={tipos[3]}>{tipos[3]}</option>
-                        <option value={tipos[4]}>{tipos[4]}</option>
-                        <option value={tipos[5]}>{tipos[5]}</option>
-                        <option value={tipos[6]}>{tipos[6]}</option>
-                        <option value={tipos[7]}>{tipos[7]}</option>
-                        <option value={tipos[8]}>{tipos[8]}</option>
-                        <option value={tipos[9]}>{tipos[9]}</option>
-                        <option value={tipos[10]}>{tipos[10]}</option>
-                        <option value={tipos[11]}>{tipos[11]}</option>
-                        <option value={tipos[12]}>{tipos[12]}</option>
-                        <option value={tipos[13]}>{tipos[13]}</option>
-                        <option value={tipos[14]}>{tipos[14]}</option>
-                        <option value={tipos[15]}>{tipos[15]}</option>
-                        <option value={tipos[16]}>{tipos[16]}</option>
-                        <option value={tipos[17]}>{tipos[17]}</option>
-                        <option value={tipos[18]}>{tipos[18]}</option>
-                        <option value={tipos[19]}>{tipos[19]}</option>
+                        {
+                          allTypes.types?.map( type => {
+                            return (
+                              <option value={type}>{type}</option>
+                            )
+                          })
+                        }
                         
                           
                         

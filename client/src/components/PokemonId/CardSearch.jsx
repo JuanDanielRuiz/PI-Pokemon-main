@@ -1,6 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink,Link } from 'react-router-dom'
 import './StylesPokemonId.css'
+
 
 
 const CardSearch = ({id,name,vida,ataque,defensa,velocidad,altura,peso,img,type}) => {
@@ -9,6 +10,9 @@ const CardSearch = ({id,name,vida,ataque,defensa,velocidad,altura,peso,img,type}
   return (
     <div className="containersearch">
       <div className="card-search">
+      <Link to="/">
+      <button>Regresar</button>
+      </Link>
         <div className="imagen-pokemon-search">
           <NavLink to={`/detail/${id}`}>
             <img src={img} alt="pokemon" />

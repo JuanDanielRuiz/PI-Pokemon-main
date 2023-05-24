@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import "./StylesCard.css";
 // import Paginacion from "../Paginacion/Paginacion";
-const Card = ({ id, name, type, img, }) => {
+const Card = ({ id, name, type, img,key }) => {
 
  
   return (
-     <div className="container">
+     <div key={id} className="container">
       <div className="card">
         <div className="imagen-pokemon">
           <NavLink to={`/detail/${id}`}>
@@ -14,7 +14,16 @@ const Card = ({ id, name, type, img, }) => {
         </div>
         <div className="info-pokemon">
           <p>Name:{name}</p>
-          <p>{type}</p>
+          {
+            typeof type === "string" ? <p>{type}</p> : 
+            type.map(element => {
+              return(
+                <p>{element}</p>
+              )
+            })
+              
+          
+          }
           
         </div>
       </div>

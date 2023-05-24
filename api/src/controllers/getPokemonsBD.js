@@ -16,7 +16,7 @@ const getDbData = async (req,res) => {
         },
       },
     });
-    console.log(pokemons)
+   
 
     const info = pokemons.map((obj) => {
       return {
@@ -33,7 +33,7 @@ const getDbData = async (req,res) => {
         type: obj.tipos?.map((el) => el.name),
       };
     });
-    console.log(info)
+   
     return res.status(200).json(info);
   } catch (error) {
     return res.status(404).json({message: error.message});

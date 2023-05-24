@@ -1,17 +1,13 @@
-
 import { useState } from "react";
-
-import {useDispatch} from "react-redux"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { postPokemon } from "../../Redux/actions.js";
-import { validate} from "./validaciones.js"
-import './StylesForms.css'
-
-
-
-
-
+import { validate } from "./validaciones.js";
+import "./StylesForms.css";
+import { getTypes } from "../../Redux/actions.js";
 
 function PokemonForm() {
+  const types = useSelector((state) => state.typesGet);
 
   const [errors, setErrors] = useState({
     name: "",
@@ -23,40 +19,38 @@ function PokemonForm() {
     altura: "",
     peso: "",
     type: "",
-  })
+  });
 
   const [userData, setUserData] = useState({
     nombre: "",
     vida: 0,
     imagen: "",
-    ataque:0 ,
+    ataque: 0,
     defensa: 0,
     velocidad: 0,
     altura: 0,
     peso: 0,
-    tipos: "",
+    type: "",
+  });
 
-  })
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getTypes());
+  }, [dispatch]);
 
-  const dispatch = useDispatch()
-
-
-  
-   const handleChange =(event) => {
+  const handleChange = (event) => {
     setUserData({
       ...userData,
-      [event.target.name]: event.target.value
-    })
-    setErrors(validate({
-      ...userData,
-      [event.target.name]: event.target.value
-    }))
-
-   }
-  
-
-
+      [event.target.name]: event.target.value,
+    });
+    setErrors(
+      validate({
+        ...userData,
+        [event.target.name]: event.target.value,
+      })
+    );
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,26 +64,15 @@ function PokemonForm() {
       velocidad: userData.velocidad,
       altura: userData.altura,
       peso: userData.peso,
-      type: userData.tipos,
+      type: userData.type,
     };
-    console.log('soy el nuevo pokemon',nuevoPokemon)
-    dispatch(postPokemon(nuevoPokemon)) 
-    
-   
 
-    // Aquí puedes hacer lo que desees con el nuevo Pokémon, por ejemplo, enviarlo a un servidor
-
-    // Restablecer el formulario
-   
+    dispatch(postPokemon(nuevoPokemon));
   };
 
-
- 
-
-
-
   return (
-    <div className="container-Forms">
+    <div className="fondo-Background-forms">
+    <div className="container-Forms fondo-Forms">
       <h1>Crear un nuevo Pokémon</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="nombre">Nombre:</label>
@@ -98,13 +81,10 @@ function PokemonForm() {
           name="nombre"
           value={userData.nombre}
           onChange={handleChange}
-          
         />
-        
-        {
-            errors.nombre && <p>{errors.nombre}</p> 
-        }
-        
+
+        {errors.nombre && <p>{errors.nombre}</p>}
+
         <br />
         <br />
         <label htmlFor="nombre">Imagen:</label>
@@ -113,11 +93,8 @@ function PokemonForm() {
           name="imagen"
           value={userData.imagen}
           onChange={handleChange}
-          
         />
-          {
-            errors.imagen && <p>{errors.imagen}</p> 
-        }
+        {errors.imagen && <p>{errors.imagen}</p>}
         <br />
         <br />
         <label htmlFor="nombre">Ataque:</label>
@@ -126,11 +103,8 @@ function PokemonForm() {
           name="ataque"
           value={userData.ataque}
           onChange={handleChange}
-          
         />
-          {
-            errors.ataque && <p>{errors.ataque}</p> 
-        }
+        {errors.ataque && <p>{errors.ataque}</p>}
         <br />
         <br />
         <label htmlFor="nombre">Vida:</label>
@@ -139,11 +113,8 @@ function PokemonForm() {
           name="vida"
           value={userData.vida}
           onChange={handleChange}
-          
         />
-          {
-            errors.vida && <p>{errors.vida}</p> 
-        }
+        {errors.vida && <p>{errors.vida}</p>}
         <br />
         <br />
         <label htmlFor="nombre">Defensa:</label>
@@ -152,11 +123,8 @@ function PokemonForm() {
           name="defensa"
           value={userData.defensa}
           onChange={handleChange}
-          
         />
-          {
-            errors.defensa && <p>{errors.defensa}</p> 
-        }
+        {errors.defensa && <p>{errors.defensa}</p>}
         <br />
         <br />
         <label htmlFor="nombre">Velocidad:</label>
@@ -165,11 +133,8 @@ function PokemonForm() {
           name="velocidad"
           value={userData.velocidad}
           onChange={handleChange}
-          
         />
-          {
-            errors.velocidad && <p>{errors.velocidad}</p> 
-        }
+        {errors.velocidad && <p>{errors.velocidad}</p>}
         <br />
         <br />
         <label htmlFor="nombre">Altura:</label>
@@ -178,11 +143,8 @@ function PokemonForm() {
           name="altura"
           value={userData.altura}
           onChange={handleChange}
-          
         />
-          {
-            errors.altura && <p>{errors.altura}</p> 
-        }
+        {errors.altura && <p>{errors.altura}</p>}
         <br />
         <br />
         <label htmlFor="nombre">Peso:</label>
@@ -191,35 +153,33 @@ function PokemonForm() {
           name="peso"
           value={userData.peso}
           onChange={handleChange}
-          
         />
-          {
-            errors.peso && <p>{errors.peso}</p> 
-        }
+        {errors.peso && <p>{errors.peso}</p>}
         <br />
         <br />
-        <label htmlFor="nombre">Tipo:</label>
-        <input
-          type="text"
-          name="tipos"
-          value={userData.tipos}
-          onChange={handleChange}
-          
-        />
-          {
-            errors.tipos && <p>{errors.tipos}</p> 
-        }
+        <label htmlFor="nombre">Tipos:</label>
 
-      
+        <select type="text" name="type" onChange={handleChange}>
+          <option value="" selected disabled>
+            Tipos de pokemon
+          </option>
+
+          {types.types?.map((element) => {
+            return <option value={element}>{element}</option>;
+          })}
+        </select>
+        {errors.type && <p>{errors.type}</p>}
+
         <br />
-        {
-          Object.keys(errors).length > 0 ?   <button disabled type="submit">Crear</button> :   <button  type="submit">Crear</button>
-        }
-         
-        
-        
-        
+        {Object.keys(errors).length > 0 ? (
+          <button disabled type="submit">
+            Crear
+          </button>
+        ) : (
+          <button type="submit">Crear</button>
+        )}
       </form>
+    </div>
     </div>
   );
 }

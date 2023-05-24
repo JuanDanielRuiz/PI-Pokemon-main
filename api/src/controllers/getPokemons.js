@@ -73,7 +73,7 @@ const getDbData = async () => {
         type: obj.type
       };
     });
-    console.log(info)
+  
     return info;
   } catch (error) {
     console.log(error);

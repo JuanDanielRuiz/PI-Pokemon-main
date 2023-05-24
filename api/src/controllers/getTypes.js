@@ -7,12 +7,13 @@ const setTypes = async (req,res) => {
 
     const types = pokemonTypes.data.results.map((obj) => obj.name);
 
-    types.forEach((tipo) => {
+    types.map((tipo) => {
       Type.findOrCreate({
         where: { name: tipo },
       });
     });
-
+   
+    
     return res.status(200).json({ types });
   } catch (e) {
     throw new Error('error L26 gettypes');

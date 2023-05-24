@@ -5,24 +5,27 @@
   margin-left: 3rem;
 }
 .card {
-  border: 3px solid black;
+  border: 5px solid black;
   width: 15rem;
-  height: 15rem;
+  height: 17rem;
   border-radius: 2rem;
   background-color: #E8F3D6;
 }
 .info-pokemon p {
   font-size: 15px;
   color: rgb(20, 128, 128);
+  margin-bottom: auto;
+  
 
   
 }
 
 .imagen-pokemon {
-  border: 1px solid black;
+  border: 3px solid black;
   width: 10rem;
   margin: auto;
   margin-top: 1rem;
+  border-radius: 2rem;
 }
 .imagen-pokemon img {
   width: 5rem;

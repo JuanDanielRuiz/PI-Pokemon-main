@@ -1,5 +1,6 @@
 export const validate = (userData) => {
-  console.log(userData);
+
+
   const errors = {}
   if (userData.nombre === '' ){
     errors.nombre = 'Falta el Nombre del pokemon'
@@ -48,10 +49,13 @@ export const validate = (userData) => {
   if (userData.peso < 0 || userData.peso > 1000 || userData.peso === 0){
     errors.peso = 'Lo siento el peso no puede ser mayor a 1000 o menor a 0'
   }
-  if( userData.type === ""){
+  if( userData.type.length === 0){
     errors.type = 'Falta el tipo de tu pokemon '
   }
-
+  if( userData.repetido === true ){
+    errors.repetido = 'Lo siento El nombre de este pokemon ya existe'
+  }
+  
   return errors
 }
 

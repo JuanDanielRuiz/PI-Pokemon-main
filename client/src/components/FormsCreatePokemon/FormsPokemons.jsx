@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { postPokemon } from "../../Redux/actions.js";
 import { validate } from "./validaciones.js";
 import "./StylesForms.css";
-import { getTypes } from "../../Redux/actions.js";
+import { getTypes ,getPokemons,getPokemonsBD} from "../../Redux/actions.js";
+
 
 function PokemonForm() {
   const types = useSelector((state) => state.typesGet);
-
+  const allspokemons = useSelector((state) => state.allPokemons);
+  const [Repetido, Setrepetido] = useState ({
+    repetido:false
+  })
   const [errors, setErrors] = useState({
     name: "",
     img: "",
@@ -18,7 +22,9 @@ function PokemonForm() {
     velocidad: "",
     altura: "",
     peso: "",
-    type: "",
+    type: '',
+    
+    
   });
 
   const [userData, setUserData] = useState({
@@ -30,15 +36,55 @@ function PokemonForm() {
     velocidad: 0,
     altura: 0,
     peso: 0,
-    type: "",
+    type: [],
+   
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTypes());
+    dispatch(getPokemons());
   }, [dispatch]);
 
+  /// Se Esta trabajando en la funcion que controla si ya existe un pokemon en el estado global entre api y base de datos con un name no te permite crearlo para no tener pokemons duplicados 
+  const handleRepet = (e) => {
+    allspokemons.map((pokeemon) => {
+      
+      if(pokeemon.name === e.target.value) {
+        Setrepetido({
+          ...Repetido,
+          repetido: true
+          
+          
+        })
+        return
+        
+  
+      }else{
+      Setrepetido({
+        ...Repetido,
+        repetido: false
+        
+      })
+      
+    }
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+    setErrors(
+      validate({
+        ...userData,
+        [e.target.name]: e.target.value,
+        
+      })
+    );
+    
+      
+    })
+
+  }
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -48,9 +94,39 @@ function PokemonForm() {
       validate({
         ...userData,
         [event.target.name]: event.target.value,
+        
       })
     );
   };
+// console.log("typos" ,userData.type.length)
+console.log(allspokemons)
+ 
+
+  const agregarPokemon = (e) => {
+    if(userData.type.length >= 2){
+      alert('Solo puedes elejir 2 tipos de pokemon')
+      return 
+    }
+    setUserData({
+      ...userData,
+       [e.target.name]: [...userData.type, e.target.value]
+    })
+    setErrors(
+      validate({
+        ...userData,
+        [e.target.name]: e.target.value,
+        
+      })
+    );
+    
+    
+
+    
+    
+    
+
+    }
+    
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,7 +142,7 @@ function PokemonForm() {
       peso: userData.peso,
       type: userData.type,
     };
-
+      // dispatch(postPokemon(nuevoPokemon));
     dispatch(postPokemon(nuevoPokemon));
   };
 
@@ -83,7 +159,8 @@ function PokemonForm() {
           onChange={handleChange}
         />
 
-        {errors.nombre && <p>{errors.nombre}</p>}
+        {Repetido.repetido && <p>El Nombre del pokemon ya existe </p>}
+        {errors.repetido && <p>{errors.repetido}</p>}
 
         <br />
         <br />
@@ -159,7 +236,7 @@ function PokemonForm() {
         <br />
         <label htmlFor="nombre">Tipos:</label>
 
-        <select type="text" name="type" onChange={handleChange}>
+        <select name="type"  onChange={agregarPokemon}>
           <option value="" selected disabled>
             Tipos de pokemon
           </option>
@@ -168,10 +245,20 @@ function PokemonForm() {
             return <option value={element}>{element}</option>;
           })}
         </select>
+        {userData.type && userData.type.map((element) => {
+          return (
+            <p>Seleccionaste Este Tipo de pokemon -{element}</p>
+          )
+        })
+          }
         {errors.type && <p>{errors.type}</p>}
 
         <br />
-        {Object.keys(errors).length > 0 ? (
+        <br />
+      
+        <br/>
+
+        {Object.keys(errors).length > 0 || Repetido.repetido === true? (
           <button disabled type="submit">
             Crear
           </button>

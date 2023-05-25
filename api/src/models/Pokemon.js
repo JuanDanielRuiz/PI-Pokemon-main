@@ -60,10 +60,10 @@ module.exports = (sequelize) => {
     },
     img:{
       type:DataTypes.STRING,
-      
     },
     type: {
-      type:DataTypes.STRING,
+      type:DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
 
     },
     createdInDb: {
